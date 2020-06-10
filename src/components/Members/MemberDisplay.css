@@ -1,0 +1,47 @@
+.profile {
+  font-family: 'Open Sans';
+  font: 15px;
+  background: #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  padding: 3px 10px;
+  font-size: 12px;
+  margin: 6px 6px 6px 6px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.task-title-desc {
+  text-align: center;
+}
+
+.complete-delete {
+  margin-top: 10px;
+}
+
+.complete {
+  margin-right: 8px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+}
+
+.delete {
+  border-radius: 4px;
+}
+
+.task-category {
+    line-height: 25px;
+    padding: 2px 20px;
+    -moz-border-radius: 30px; /* or 50% */
+    border-radius: 30px; /* or 50% */
+    background-color: lightblue;
+    color: black;
+    text-align: center;
+    font-size: 12px;
+}
+
+.tasks-card-title {
+  text-align: center;
+  font-family: 'Bungee';
+}

@@ -1,0 +1,34 @@
+.member-list-section {
+  font-family: 'Open Sans';
+  background: #e8e8e8;
+  border-radius: 4px;
+  padding: 5px;
+  margin: auto;
+  max-width: 500px;
+}
+
+.member-list {
+  background: #e8e8e8;
+  border-radius: 4px;
+  padding: 5px;
+  margin: auto;
+  margin-top: 20px;
+  max-width: 500px;
+}
+
+.name-title {
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+}
+
+.clear-member {
+  margin-top: 20px;
+  margin-left: 45%;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.clear-member-message {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}

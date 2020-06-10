@@ -1,0 +1,30 @@
+/* .form-input {
+  margin: 20px auto;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 2px 3px #ccc;
+  border: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+} */
+
+.Input {
+  display: block;
+}
+
+.form {
+  font-family: 'Roboto', sans-serif;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.add-profile {
+  margin-top: 20px;
+  border-radius: 4px;
+}
+
+.form-category {
+  margin-top: 10px;
+}
