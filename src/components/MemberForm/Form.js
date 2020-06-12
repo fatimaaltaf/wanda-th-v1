@@ -11,6 +11,7 @@ export default function Form(props) {
   const [fullName, setFullName] = useState(""); //set default title to empty
   const [website, setWebsite] = useState(""); //set default desc to empty
   const [websiteData, setWebsiteData] = useState([]);
+  const [headings, setHeadings] = useState("");
 
   //Bitly initialize
   const bitly = new BitlyClient("710b2e0d601a9877cbab4c799abaeea0f1b09625", {});
@@ -25,6 +26,7 @@ export default function Form(props) {
     return result.link;
   }
 
+  // Test function for data scraping
   const getDataFromApi = () => {
     console.log("I'm called...");
     fetch(website)
@@ -54,9 +56,6 @@ export default function Form(props) {
 
     // axios.get(website).then((response) => console.log("this is...", response));
 
-    //call prop
-    console.log("this is the website..", website);
-
     // Check if user input includes https:// and append if necessary
     let fullURL;
     if (!website.includes("https://")) {
@@ -69,38 +68,15 @@ export default function Form(props) {
     // console.log("this is...", shortenedURL);
 
     getDataFromApi();
-    addMember(fullName, shortenedURL);
+
+    // call prop
+    addMember(fullName, shortenedURL, headings);
 
     // Reset form fields
     setFullName("");
     setWebsite("");
+    setHeadings("");
   };
-
-  //   <form class="w-full max-w-sm" >
-  //   <div class="md:flex md:items-center mb-6">
-  // <div class="md:w-1/3"></div>
-  //   <span>Full Name:</span>
-  //   <input
-  //     type="text"
-  //     value={fullName}
-  //     name="Full Name"
-  //     onChange={(event) => setFullName(event.target.value)}
-  //   />
-  //   <span>Website:</span>
-  //   <input
-  //     type="text"
-  //     value={website}
-  //     name="Website"
-  //     onChange={(event) => setWebsite(event.target.value)}
-  //   />
-  //   <button
-  //     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-  //     type="submit"
-  //   >
-  //     Add Profile{" "}
-  //   </button>
-  //   </div>
-  // </form>
 
   return (
     <form class="w-full max-w-sm" onSubmit={handleSubmit}>
@@ -144,6 +120,28 @@ export default function Form(props) {
           />
         </div>
       </div>
+
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+            class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            for="inline-username"
+          >
+            Profile Information
+          </label>
+        </div>
+        <div class="md:w-2/3">
+          <input
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
+            id="inline-username"
+            type="text"
+            value={headings}
+            name="Website"
+            onChange={(event) => setHeadings(event.target.value)}
+          />
+        </div>
+      </div>
+
       <div class="md:flex md:items-center">
         <div class="md:w-1/3"></div>
         <div class="md:w-2/3">

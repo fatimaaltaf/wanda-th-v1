@@ -23,8 +23,8 @@ export default function SearchToolManager() {
   const [filterDisplay, setFilterDisplay] = useState([]);
 
   // Add a new member to array
-  const addMember = (fullName, shortenedURL) => {
-    const newMember = [...memberList, { fullName, shortenedURL }];
+  const addMember = (fullName, shortenedURL, headings) => {
+    const newMember = [...memberList, { fullName, shortenedURL, headings }];
     setMemberList(newMember);
   };
 
@@ -80,6 +80,7 @@ export default function SearchToolManager() {
         <Form addMember={addMember} />
       </div>
       <div class="py-8">
+        <p class="pb-5 text-lg">Search Profiles</p>
         <SearchBar
           handleChange={(e) => handleChange(e.target.value)}
           value={wordInput}

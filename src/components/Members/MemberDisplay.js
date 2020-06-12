@@ -6,7 +6,7 @@ function Member(props) {
 
   return (
     <div className="profile">
-      <p>Member Name:{member.fullName}</p>
+      <p>Member Name: {member.fullName}</p>
       <p>
         Member Website: <a href={member.shortenedURL}>{member.shortenedURL}</a>
       </p>
