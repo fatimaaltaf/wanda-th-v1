@@ -10,9 +10,12 @@
     "bitly": "^7.1.0",
     "bitly-react": "^6.0.12",
     "cheerio": "^1.0.0-rc.3",
+    "promise": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-render-html": "^0.6.0",
+    "react-scripts": "3.4.1",
+    "request": "^2.88.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "./Form.css";
 import { BitlyClient } from "bitly";
 import axios from "axios";
+import cheerio from "cheerio";
+import renderHTML from "react-render-html";
 
 export default function Form(props) {
   const { addMember } = props;
 
   const [fullName, setFullName] = useState(""); //set default title to empty
   const [website, setWebsite] = useState(""); //set default desc to empty
+  const [websiteData, setWebsiteData] = useState([]);
 
   //Bitly initialize
   const bitly = new BitlyClient("710b2e0d601a9877cbab4c799abaeea0f1b09625", {});
@@ -21,6 +24,23 @@ export default function Form(props) {
     }
     return result.link;
   }
+
+  const getDataFromApi = () => {
+    console.log("I'm called...");
+    fetch(website)
+      .then((response) => {
+        console.log(response);
+        response.text();
+      })
+      .then((data) => {
+        const $ = cheerio.load(data);
+        setWebsiteData($("h1").html());
+        console.log("this is website data...", websiteData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   //Handles form onSubmit
   const handleSubmit = async (event) => {
@@ -47,6 +67,8 @@ export default function Form(props) {
 
     const shortenedURL = await init(fullURL);
     // console.log("this is...", shortenedURL);
+
+    getDataFromApi();
     addMember(fullName, shortenedURL);
 
     // Reset form fields
@@ -54,25 +76,85 @@ export default function Form(props) {
     setWebsite("");
   };
 
+  //   <form class="w-full max-w-sm" >
+  //   <div class="md:flex md:items-center mb-6">
+  // <div class="md:w-1/3"></div>
+  //   <span>Full Name:</span>
+  //   <input
+  //     type="text"
+  //     value={fullName}
+  //     name="Full Name"
+  //     onChange={(event) => setFullName(event.target.value)}
+  //   />
+  //   <span>Website:</span>
+  //   <input
+  //     type="text"
+  //     value={website}
+  //     name="Website"
+  //     onChange={(event) => setWebsite(event.target.value)}
+  //   />
+  //   <button
+  //     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+  //     type="submit"
+  //   >
+  //     Add Profile{" "}
+  //   </button>
+  //   </div>
+  // </form>
+
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <span>Full Name:</span>
-      <input
-        type="text"
-        value={fullName}
-        name="Full Name"
-        onChange={(event) => setFullName(event.target.value)}
-      />
-      <span>Website:</span>
-      <input
-        type="text"
-        value={website}
-        name="Website"
-        onChange={(event) => setWebsite(event.target.value)}
-      />
-      <button className="add-profile" type="submit">
-        Add Profile{" "}
-      </button>
+    <form class="w-full max-w-sm" onSubmit={handleSubmit}>
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+            class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            for="inline-full-name"
+          >
+            Full Name
+          </label>
+        </div>
+        <div class="md:w-2/3">
+          <input
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
+            id="inline-full-name"
+            type="text"
+            value={fullName}
+            name="Full Name"
+            onChange={(event) => setFullName(event.target.value)}
+          />
+        </div>
+      </div>
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+            class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            for="inline-username"
+          >
+            Website
+          </label>
+        </div>
+        <div class="md:w-2/3">
+          <input
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
+            id="inline-username"
+            type="text"
+            value={website}
+            name="Website"
+            onChange={(event) => setWebsite(event.target.value)}
+          />
+        </div>
+      </div>
+      <div class="md:flex md:items-center">
+        <div class="md:w-1/3"></div>
+        <div class="md:w-2/3">
+          <button
+            class="font-sans shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Create Profile
+          </button>
+        </div>
+      </div>
     </form>
   );
 }

@@ -2,7 +2,7 @@
   font-family: 'Open Sans';
   background: #e8e8e8;
   border-radius: 4px;
-  padding: 5px;
+  padding: 20px;
   margin: auto;
   max-width: 500px;
 }
@@ -19,6 +19,7 @@
 .name-title {
   text-align: center;
   font-family: 'Bebas Neue', cursive;
+  font-size: x-large;
 }
 
 .clear-member {
@@ -31,4 +32,10 @@
 .clear-member-message {
   font-family: 'Roboto', sans-serif;
   text-align: center;
+}
+
+.member-list-title {
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  font-size: x-large;
 }

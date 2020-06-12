@@ -20,7 +20,7 @@ export default function SearchToolManager() {
   ]);
 
   const [wordInput, setWordInput] = useState("");
-  const [filterDisplay, setFilterDisplay] = useState("");
+  const [filterDisplay, setFilterDisplay] = useState([]);
 
   // Add a new member to array
   const addMember = (fullName, shortenedURL) => {
@@ -35,17 +35,18 @@ export default function SearchToolManager() {
     setMemberList(newMember);
   };
 
+  // Search Filter functionality
   // handleChange runs each time there is change in filter search input
   const handleChange = (e) => {
     setWordInput(e);
 
     // convert to lowercase given user input may be in any format
     // return oldList as an array of objects to hold changed list
-    let oldList = memberList.map((member) => {
-      console.log("THIS IS...", member.headings);
+    let oldList = memberList.map((member, index) => {
+      console.log("THIS IS...", member, index);
       return {
-        // fullName: member.fullName.toLowerCase(),
-        // website: member.website.toLowerCase(),
+        fullName: member.fullName.toLowerCase(),
+        shortenedURL: member.shortenedURL.toLowerCase(),
         headings: member.headings.toLowerCase(),
       };
     });
@@ -57,6 +58,8 @@ export default function SearchToolManager() {
       newList = oldList.filter((member) =>
         member.headings.includes(wordInput.toLowerCase())
       );
+
+      console.log("NEWLIST...", newList);
       setFilterDisplay(newList);
     } else {
       setFilterDisplay(memberList);
@@ -72,23 +75,27 @@ export default function SearchToolManager() {
         />
         Expertz
       </h1>
-      <h3>Directory Search Tool</h3>
+      <h3 class="pb-5 text-lg">Directory Search Tool</h3>
       <div className="member-list-section">
         <Form addMember={addMember} />
       </div>
-      <p>Search Profiles</p>
-      <SearchBar
-        handleChange={(e) => handleChange(e.target.value)}
-        value={wordInput}
-      />
+      <div class="py-8">
+        <SearchBar
+          handleChange={(e) => handleChange(e.target.value)}
+          value={wordInput}
+        />
+      </div>
       <div className="member-list">
-        <h3>Member Profiles</h3>
+        <h3 className="member-list-title">Member Profiles</h3>
         {memberList.length ? (
-          memberList.map((member, index) => (
+          (!filterDisplay.length && !wordInput.length
+            ? memberList
+            : filterDisplay
+          ).map((member, index) => (
             <Member
               key={index}
               index={index}
-              member={wordInput.length < 1 ? member : filterDisplay}
+              member={member}
               headings={member.headings}
               deleteMember={deleteMember}
             />
