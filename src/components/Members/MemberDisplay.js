@@ -2,14 +2,15 @@ import React from "react";
 
 function Member(props) {
   // &nbsp;
-  const { member, index, deleteMember } = props;
+  const { member, headings, index, deleteMember } = props;
 
   return (
     <div className="profile">
       <p>Member Name:{member.fullName}</p>
-      <p>Member Website: {member.website}</p>
-      <p>Shortened URL: shortened url here</p>
-      <p>More Info: website headings here</p>
+      <p>
+        Member Website: <a href={member.shortenedURL}>{member.shortenedURL}</a>
+      </p>
+      <p>Member info: {headings}</p>
 
       <button className="delete" onClick={() => deleteMember(index)}>
         Delete

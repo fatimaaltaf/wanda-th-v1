@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Form.css";
+import { BitlyClient } from "bitly";
+import axios from "axios";
 
 export default function Form(props) {
   const { addMember } = props;
@@ -7,8 +9,21 @@ export default function Form(props) {
   const [fullName, setFullName] = useState(""); //set default title to empty
   const [website, setWebsite] = useState(""); //set default desc to empty
 
+  //Bitly initialize
+  const bitly = new BitlyClient("710b2e0d601a9877cbab4c799abaeea0f1b09625", {});
+
+  async function init(website) {
+    let result;
+    try {
+      result = await bitly.shorten(website);
+    } catch (e) {
+      throw e;
+    }
+    return result.link;
+  }
+
   //Handles form onSubmit
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     //Error handling
@@ -17,8 +32,22 @@ export default function Form(props) {
       return;
     }
 
+    // axios.get(website).then((response) => console.log("this is...", response));
+
     //call prop
-    addMember(fullName, website);
+    console.log("this is the website..", website);
+
+    // Check if user input includes https:// and append if necessary
+    let fullURL;
+    if (!website.includes("https://")) {
+      fullURL = `https://${website}`;
+    } else {
+      fullURL = website;
+    }
+
+    const shortenedURL = await init(fullURL);
+    // console.log("this is...", shortenedURL);
+    addMember(fullName, shortenedURL);
 
     // Reset form fields
     setFullName("");
