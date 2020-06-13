@@ -4,7 +4,8 @@
 
 * Create a search tool directory where users can add a profile with a website link and more information about their expertise 
 * One view for profile with only name, shortened URL, and user expertise info displayed in the profile to create a cleaner UI.
-* Profile information is searchable via the search filter bar
+* Due to not having enough time to complete the data scrape feature, I put in a field for users to manually add their expertise which is searchable. 
+* Profile information is searchable via the search filter bar. 
 
 ## If I had more time ⏰:
 
