@@ -3,7 +3,6 @@ import Form from "../components/MemberForm/Form";
 import Member from "../components/Members/MemberDisplay";
 import SearchBar from "../components/SearchBar/SearchBar";
 import "./SearchToolManager.css";
-// import { BitlyClient } from "bitly-react";
 
 export default function SearchToolManager() {
   const [memberList, setMemberList] = useState([
