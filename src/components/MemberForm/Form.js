@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./Form.css";
 import { BitlyClient } from "bitly";
-import axios from "axios";
 import cheerio from "cheerio";
-import renderHTML from "react-render-html";
 
 export default function Form(props) {
   const { addMember } = props;
@@ -54,8 +52,6 @@ export default function Form(props) {
       return;
     }
 
-    // axios.get(website).then((response) => console.log("this is...", response));
-
     // Check if user input includes https:// and append if necessary
     let fullURL;
     if (!website.includes("https://")) {
@@ -65,7 +61,6 @@ export default function Form(props) {
     }
 
     const shortenedURL = await init(fullURL);
-    // console.log("this is...", shortenedURL);
 
     getDataFromApi();
 
@@ -79,9 +74,9 @@ export default function Form(props) {
   };
 
   return (
-    <form class="w-full max-w-sm" onSubmit={handleSubmit}>
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
+    <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+      <div className="md:flex md:items-center mb-6">
+        <div className="md:w-1/3">
           <label
             class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="inline-full-name"
@@ -89,9 +84,9 @@ export default function Form(props) {
             Full Name
           </label>
         </div>
-        <div class="md:w-2/3">
+        <div className="md:w-2/3">
           <input
-            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
+            class="font-sans bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
             id="inline-full-name"
             type="text"
             value={fullName}
@@ -100,18 +95,18 @@ export default function Form(props) {
           />
         </div>
       </div>
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
+      <div className="md:flex md:items-center mb-6">
+        <div className="md:w-1/3">
           <label
-            class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            className="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="inline-username"
           >
             Website
           </label>
         </div>
-        <div class="md:w-2/3">
+        <div className="md:w-2/3">
           <input
-            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
+            className="font-sans bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
             id="inline-username"
             type="text"
             value={website}
@@ -121,18 +116,18 @@ export default function Form(props) {
         </div>
       </div>
 
-      <div class="md:flex md:items-center mb-6">
-        <div class="md:w-1/3">
+      <div className="md:flex md:items-center mb-6">
+        <div className="md:w-1/3">
           <label
-            class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            className="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="inline-username"
           >
             Profile Information
           </label>
         </div>
-        <div class="md:w-2/3">
+        <div className="md:w-2/3">
           <input
-            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
+            className="font-sans bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75"
             id="inline-username"
             type="text"
             value={headings}
@@ -142,11 +137,11 @@ export default function Form(props) {
         </div>
       </div>
 
-      <div class="md:flex md:items-center">
-        <div class="md:w-1/3"></div>
-        <div class="md:w-2/3">
+      <div className="md:flex md:items-center">
+        <div className="md:w-1/3"></div>
+        <div className="md:w-2/3">
           <button
-            class="font-sans shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            className="font-sans shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
             type="submit"
           >
             Create Profile

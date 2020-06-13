@@ -1,20 +1,28 @@
 import React from "react";
-
+import "./MemberDisplay.css";
 function Member(props) {
-  // &nbsp;
   const { member, headings, index, deleteMember } = props;
 
   return (
-    <div className="profile">
-      <p>Member Name: {member.fullName}</p>
-      <p>
-        Member Website: <a href={member.shortenedURL}>{member.shortenedURL}</a>
-      </p>
-      <p>Member info: {headings}</p>
-
-      <button className="delete" onClick={() => deleteMember(index)}>
-        Delete
-      </button>
+    <div class="bg-white max-w-sm rounded overflow-hidden shadow-lg m-5">
+      <div class="px-6 py-4">
+        <div class="font-bold text-xl mb-2 text-center">{member.fullName}</div>
+        <p class="text-gray-700 text-base">
+          <b>Member Website:</b>{" "}
+          <a className="underline" href={member.shortenedURL}>
+            {member.shortenedURL}
+          </a>
+        </p>
+        <p class="text-gray-700 text-base">
+          <b>Member Info:</b> {headings}
+        </p>
+        <button
+          className="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => deleteMember(index)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

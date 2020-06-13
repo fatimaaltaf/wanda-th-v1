@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "../components/MemberForm/Form";
 import Member from "../components/Members/MemberDisplay";
 import SearchBar from "../components/SearchBar/SearchBar";
@@ -9,13 +9,13 @@ export default function SearchToolManager() {
   const [memberList, setMemberList] = useState([
     {
       fullName: "Fatima Altaf",
-      shortenedURL: "www.google.com",
-      headings: "Baker - Baked pies and cakes for your every occassion",
+      shortenedURL: "https://bit.ly/3dTawUx",
+      headings: "Web Developer Extraordinaire",
     },
     {
-      fullName: "Maliha Hossain",
-      shortenedURL: "www.malihahossain.com",
-      headings: "Software Dev Extraordinaire",
+      fullName: "Ahmed Dauda",
+      shortenedURL: "https://bit.ly/37ounZa",
+      headings: "Black Panther",
     },
   ]);
 
@@ -39,55 +39,47 @@ export default function SearchToolManager() {
   // handleChange runs each time there is change in filter search input
   const handleChange = (e) => {
     setWordInput(e);
-
-    // convert to lowercase given user input may be in any format
-    // return oldList as an array of objects to hold changed list
-    let oldList = memberList.map((member, index) => {
-      console.log("THIS IS...", member, index);
-      return {
-        fullName: member.fullName.toLowerCase(),
-        shortenedURL: member.shortenedURL.toLowerCase(),
-        headings: member.headings.toLowerCase(),
-      };
-    });
-
-    if (wordInput !== "") {
-      let newList = [];
-
-      // array of profiles that meet search criteria
-      newList = oldList.filter((member) =>
-        member.headings.includes(wordInput.toLowerCase())
-      );
-
-      console.log("NEWLIST...", newList);
-      setFilterDisplay(newList);
-    } else {
-      setFilterDisplay(memberList);
-    }
   };
+
+  useEffect(() => {
+    // convert to lowercase given user input may be in any format
+    // return matching results as an array of objects to hold changed list
+    if (wordInput !== "") {
+      const matchingList = memberList.filter((member) => {
+        const lowercase = member.headings.toLowerCase();
+        return lowercase.includes(wordInput.toLowerCase());
+      });
+      console.log("matches", matchingList);
+      setFilterDisplay(matchingList);
+    } else {
+      setFilterDisplay([]);
+    }
+  }, [memberList, wordInput]);
 
   return (
     <div className="App">
       <h1 className="name-title">
         <img
+          className="centered"
           alt="Magnifying class icon"
           src="https://img.icons8.com/clouds/100/000000/zoom-out.png"
         />
         Expertz
       </h1>
-      <h3 class="pb-5 text-lg">Directory Search Tool</h3>
-      <div className="member-list-section">
+      <h3 className="pb-5 text-lg">Directory Search Tool</h3>
+      <div className="profile-list-section">
+        <p className="subtitle">Add a Profile</p>
         <Form addMember={addMember} />
       </div>
-      <div class="py-8">
-        <p class="pb-5 text-lg">Search Profiles</p>
+      <div className="search-bar-section">
+        <p className="subtitle">Search Profiles</p>
         <SearchBar
-          handleChange={(e) => handleChange(e.target.value)}
+          handleChange={(e) => setWordInput(e.target.value)}
           value={wordInput}
         />
       </div>
-      <div className="member-list">
-        <h3 className="member-list-title">Member Profiles</h3>
+      <div className="members-list">
+        <h3 className="subtitle">Member Profiles</h3>
         {memberList.length ? (
           (!filterDisplay.length && !wordInput.length
             ? memberList
@@ -104,6 +96,9 @@ export default function SearchToolManager() {
         ) : (
           <p className="clear-member-message">Please add a Member</p>
         )}
+      </div>
+      <div class="footer">
+        <p></p>
       </div>
     </div>
   );
