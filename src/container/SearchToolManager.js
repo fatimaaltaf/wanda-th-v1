@@ -9,12 +9,12 @@ export default function SearchToolManager() {
     {
       fullName: "Fatima Altaf",
       shortenedURL: "https://bit.ly/3dTawUx",
-      headings: "Web Developer Extraordinaire",
+      scrapedData: "Web Developer Extraordinaire",
     },
     {
       fullName: "Ahmed Dauda",
       shortenedURL: "https://bit.ly/37ounZa",
-      headings: "Black Panther",
+      scrapedData: "Black Panther",
     },
   ]);
 
@@ -22,8 +22,8 @@ export default function SearchToolManager() {
   const [filterDisplay, setFilterDisplay] = useState([]);
 
   // Add a new member to array
-  const addMember = (fullName, shortenedURL, headings) => {
-    const newMember = [...memberList, { fullName, shortenedURL, headings }];
+  const addMember = (fullName, shortenedURL, scrapedData) => {
+    const newMember = [...memberList, { fullName, shortenedURL, scrapedData }];
     setMemberList(newMember);
   };
 
@@ -45,7 +45,7 @@ export default function SearchToolManager() {
     // return matching results as an array of objects to hold changed list
     if (wordInput !== "") {
       const matchingList = memberList.filter((member) => {
-        const lowercase = member.headings.toLowerCase();
+        const lowercase = member.scrapedData.toLowerCase();
         return lowercase.includes(wordInput.toLowerCase());
       });
       console.log("matches", matchingList);
@@ -88,7 +88,7 @@ export default function SearchToolManager() {
               key={index}
               index={index}
               member={member}
-              headings={member.headings}
+              scrapedData={member.scrapedData}
               deleteMember={deleteMember}
             />
           ))

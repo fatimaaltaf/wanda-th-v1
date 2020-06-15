@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import "./Form.css";
 import { BitlyClient } from "bitly";
-import cheerio from "cheerio";
+import axios from "axios";
 
 export default function Form(props) {
   const { addMember } = props;
 
-  const [fullName, setFullName] = useState(""); //set default title to empty
-  const [website, setWebsite] = useState(""); //set default desc to empty
-  const [websiteData, setWebsiteData] = useState([]);
-  const [headings, setHeadings] = useState("");
+  const [fullName, setFullName] = useState(""); //set default name to empty
+  const [website, setWebsite] = useState(""); //set default website to empty
+  const [html, setHTML] = useState("");
 
   //Bitly initialize
   const bitly = new BitlyClient("710b2e0d601a9877cbab4c799abaeea0f1b09625", {});
@@ -24,23 +23,38 @@ export default function Form(props) {
     return result.link;
   }
 
-  // Test function for data scraping
-  const getDataFromApi = () => {
-    console.log("I'm called...");
-    fetch(website)
+  // Backend scrape function
+  const dataScrape = () => {
+    axios
+      .get("http://localhost:5000/scrape", {
+        params: { url: website },
+      })
       .then((response) => {
-        console.log(response);
-        response.text();
-      })
-      .then((data) => {
-        const $ = cheerio.load(data);
-        setWebsiteData($("h1").html());
-        console.log("this is website data...", websiteData);
-      })
-      .catch((error) => {
-        console.error(error);
+        console.log("this is the response...", response.data);
+        setHTML({
+          ...html,
+          html: response.data,
+        });
       });
   };
+
+  // Test function for data scraping
+  // const getDataFromApi = () => {
+  //   console.log("I'm called...");
+  //   fetch(website)
+  //     .then((response) => {
+  //       console.log(response);
+  //       response.text();
+  //     })
+  //     .then((data) => {
+  //       const $ = cheerio.load(data);
+  //       setWebsiteData($("h1").html());
+  //       console.log("this is website data...", websiteData);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   //Handles form onSubmit
   const handleSubmit = async (event) => {
@@ -62,15 +76,14 @@ export default function Form(props) {
 
     const shortenedURL = await init(fullURL);
 
-    getDataFromApi();
+    const scrapedData = dataScrape();
 
     // call prop
-    addMember(fullName, shortenedURL, headings);
+    addMember(fullName, shortenedURL, scrapedData);
 
     // Reset form fields
     setFullName("");
     setWebsite("");
-    setHeadings("");
   };
 
   return (
@@ -78,7 +91,7 @@ export default function Form(props) {
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/3">
           <label
-            class="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            className="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="inline-full-name"
           >
             Full Name
@@ -86,7 +99,7 @@ export default function Form(props) {
         </div>
         <div className="md:w-2/3">
           <input
-            class="font-sans bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75 overflow-hidden shadow-lg"
+            className="font-sans bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75 overflow-hidden shadow-lg"
             id="inline-full-name"
             type="text"
             value={fullName}
@@ -115,28 +128,6 @@ export default function Form(props) {
           />
         </div>
       </div>
-
-      <div className="md:flex md:items-center mb-6">
-        <div className="md:w-1/3">
-          <label
-            className="font-sans block text-blue-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-            for="inline-username"
-          >
-            Profile Information
-          </label>
-        </div>
-        <div className="md:w-2/3">
-          <input
-            className="font-sans bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 border-blue-500 border-opacity-75 overflow-hidden shadow-lg"
-            id="inline-username"
-            type="text"
-            value={headings}
-            name="Website"
-            onChange={(event) => setHeadings(event.target.value)}
-          />
-        </div>
-      </div>
-
       <div className="md:flex md:items-center">
         <div className="md:w-1/3"></div>
         <div className="md:w-2/3">
