@@ -96,7 +96,7 @@ export default function SearchToolManager() {
           <p className="clear-member-message">Please add a Member</p>
         )}
       </div>
-      <div class="footer">
+      <div className="footer">
         <p></p>
       </div>
     </div>
