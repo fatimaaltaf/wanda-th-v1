@@ -22,18 +22,17 @@ export default function Form(props) {
     return result.link;
   }
 
-  // Backend scrape function
+  // scrape function connecting to server using axios
   async function dataScrape() {
     let result;
     try {
       result = await axios.get("http://localhost:5000/", {
         params: { url: website },
       });
-      console.log("RESULT", result);
     } catch (e) {
       throw e;
     }
-    return result.data.join(", ");
+    return result.data.join(", "); //convert array to string
   }
 
   //Handles form onSubmit
@@ -53,6 +52,8 @@ export default function Form(props) {
     } else {
       fullURL = website;
     }
+
+    // url shortner
     const shortenedURL = await init(fullURL);
 
     const scrapedData = await dataScrape();
