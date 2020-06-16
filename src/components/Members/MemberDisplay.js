@@ -1,7 +1,8 @@
 import React from "react";
 import "./MemberDisplay.css";
+
 function Member(props) {
-  const { member, headings, index, deleteMember } = props;
+  const { member, scrapedData, index, deleteMember } = props;
 
   return (
     <div className="bg-white max-w-sm rounded overflow-hidden shadow-lg m-12 mt-5">
@@ -15,8 +16,8 @@ function Member(props) {
             {member.shortenedURL}
           </a>
         </p>
-        <p className="text-gray-700 text-base">
-          <b>Member Info:</b> {headings}
+        <p class="text-gray-700 text-base">
+          <b>Member Info:</b> {scrapedData}
         </p>
         <button
           className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
