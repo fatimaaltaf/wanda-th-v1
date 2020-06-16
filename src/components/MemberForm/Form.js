@@ -8,7 +8,6 @@ export default function Form(props) {
 
   const [fullName, setFullName] = useState(""); //set default name to empty
   const [website, setWebsite] = useState(""); //set default website to empty
-  // const [html, setHTML] = useState("");
 
   //Bitly initialize
   const bitly = new BitlyClient("710b2e0d601a9877cbab4c799abaeea0f1b09625", {});

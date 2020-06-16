@@ -48,7 +48,6 @@ export default function SearchToolManager() {
         const lowercase = member.scrapedData.toLowerCase();
         return lowercase.includes(wordInput.toLowerCase());
       });
-      console.log("matches", matchingList);
       setFilterDisplay(matchingList);
     } else {
       setFilterDisplay([]);
