@@ -9,12 +9,12 @@ export default function SearchToolManager() {
     {
       fullName: "Fatima Altaf",
       shortenedURL: "https://bit.ly/3dTawUx",
-      scrapedData: "Web Developer Extraordinaire",
+      scrapedData: "Web Developer Extraordinaire, Test, 123",
     },
     {
       fullName: "Ahmed Dauda",
       shortenedURL: "https://bit.ly/37ounZa",
-      scrapedData: "Black Panther",
+      scrapedData: "Black Panther, Test, 123",
     },
   ]);
 

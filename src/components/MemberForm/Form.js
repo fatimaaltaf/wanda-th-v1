@@ -8,7 +8,7 @@ export default function Form(props) {
 
   const [fullName, setFullName] = useState(""); //set default name to empty
   const [website, setWebsite] = useState(""); //set default website to empty
-  const [html, setHTML] = useState("");
+  // const [html, setHTML] = useState("");
 
   //Bitly initialize
   const bitly = new BitlyClient("710b2e0d601a9877cbab4c799abaeea0f1b09625", {});
@@ -24,19 +24,18 @@ export default function Form(props) {
   }
 
   // Backend scrape function
-  const dataScrape = () => {
-    axios
-      .get("http://localhost:5000/scrape", {
+  async function dataScrape() {
+    let result;
+    try {
+      result = await axios.get("http://localhost:5000/", {
         params: { url: website },
-      })
-      .then((response) => {
-        console.log("this is the response...", response.data);
-        setHTML({
-          ...html,
-          html: response.data,
-        });
       });
-  };
+      console.log("RESULT", result);
+    } catch (e) {
+      throw e;
+    }
+    return result.data.join(", ");
+  }
 
   // Test function for data scraping
   // const getDataFromApi = () => {
@@ -68,15 +67,15 @@ export default function Form(props) {
 
     // Check if user input includes https:// and append if necessary
     let fullURL;
-    if (!website.includes("https://")) {
+    if (!website.includes("http://") || !website.includes("https://")) {
       fullURL = `https://${website}`;
     } else {
       fullURL = website;
     }
-
     const shortenedURL = await init(fullURL);
 
-    const scrapedData = dataScrape();
+    const scrapedData = await dataScrape();
+    console.log("SCRAPED DATAAAA", scrapedData);
 
     // call prop
     addMember(fullName, shortenedURL, scrapedData);

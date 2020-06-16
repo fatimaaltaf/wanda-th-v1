@@ -3,6 +3,8 @@ import "./MemberDisplay.css";
 function Member(props) {
   const { member, scrapedData, index, deleteMember } = props;
 
+  console.log("scraped data from member display", scrapedData);
+
   return (
     <div class="bg-white max-w-sm rounded overflow-hidden shadow-lg m-12 mt-5">
       <div class="px-6 py-4">
