@@ -5,10 +5,12 @@ function Member(props) {
   const { member, scrapedData, index, deleteMember } = props;
 
   return (
-    <div class="bg-white max-w-sm rounded overflow-hidden shadow-lg m-12 mt-5">
-      <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2 text-center">{member.fullName}</div>
-        <p class="text-gray-700 text-base mb-2">
+    <div className="bg-white max-w-sm rounded overflow-hidden shadow-lg m-12 mt-5">
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2 text-center">
+          {member.fullName}
+        </div>
+        <p className="text-gray-700 text-base mb-2">
           <b>Member Website:</b>{" "}
           <a className="underline" href={member.shortenedURL}>
             {member.shortenedURL}
