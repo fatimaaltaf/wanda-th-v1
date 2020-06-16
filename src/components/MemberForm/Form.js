@@ -36,24 +36,6 @@ export default function Form(props) {
     return result.data.join(", ");
   }
 
-  // Test function for data scraping
-  // const getDataFromApi = () => {
-  //   console.log("I'm called...");
-  //   fetch(website)
-  //     .then((response) => {
-  //       console.log(response);
-  //       response.text();
-  //     })
-  //     .then((data) => {
-  //       const $ = cheerio.load(data);
-  //       setWebsiteData($("h1").html());
-  //       console.log("this is website data...", websiteData);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
   //Handles form onSubmit
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -74,7 +56,6 @@ export default function Form(props) {
     const shortenedURL = await init(fullURL);
 
     const scrapedData = await dataScrape();
-    console.log("SCRAPED DATAAAA", scrapedData);
 
     // call prop
     addMember(fullName, shortenedURL, scrapedData);
