@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "bitly": "^7.1.0",
     "bitly-react": "^6.0.12",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "promise": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
